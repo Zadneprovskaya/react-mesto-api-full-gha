@@ -7,7 +7,7 @@ const helmet = require('helmet');
 // eslint-disable-next-line no-undef
 const { errors } = require('celebrate');
 // eslint-disable-next-line no-undef
-const cors = require('cors');
+//const cors = require('cors');
 
 const URL = 'mongodb://127.0.0.1:27017/mestodb';
 // eslint-disable-next-line no-undef
@@ -29,15 +29,31 @@ const { validateLogin, validateCreateUser } = require('./middlewares/validation'
 // eslint-disable-next-line no-undef
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const allowedCors = [
+  'https://myeducateproject.nomoredomainsrocks.ru',
+  'http://myeducateproject.nomoredomainsrocks.ru',
+  'localhost:3000'
+];
+
 const app = express();
-app.use(cors({
+/* app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://api.myeducateproject.nomoredomainsrocks.ru',
+    'https://myeducateproject.nomoredomainsrocks.ru',
   ],
   credentials: true,
   maxAge: 30,
-}));
+})); */
+
+
+app.use(function(req, res, next) {
+  const { origin } = req.headers; 
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
 
 mongoose.connect(URL, {
   useNewUrlParser: true,
