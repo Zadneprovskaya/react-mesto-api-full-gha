@@ -1,0 +1,44 @@
+.sign__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-bottom: 13px;
+    width: 358px;
+    border-style: none;
+    border-bottom: 2px solid #CCCCCC;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+    background-color: transparent;
+}
+
+.sign__input:focus {
+    outline: none;
+}
+
+.sign__input:-webkit-autofill,
+.sign__input:-webkit-autofill:hover, 
+.sign__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@media screen and (max-width: 418px) {
+    .sign__input {
+        width: calc((100vw - 320px)/(418 - 320)*(358 - 260) + 260px);
+        margin-left: calc((100vw - 320px)/(418 - 320)*(0 - 30) + 30px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .sign__input {
+        width: 260px;
+        margin-left: 30px;
+    }
+}

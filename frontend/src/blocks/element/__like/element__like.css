@@ -1,0 +1,17 @@
+.element__like {
+    margin: 0;
+    padding: 0;
+    width: 23px;
+    height: 19px;
+    background: none;
+    background-image: url(../../../images/Vector_serdce.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+}
+
+.element__like:hover {
+    opacity: .5;
+}

@@ -1,0 +1,23 @@
+.popup-info__image {
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 60px;
+    padding-bottom: 32px;
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1280px) {
+    .popup-info__image {
+        padding-top: calc((100vw - 320px)/(1280 - 320)*(60 - 50) + 50px);
+        padding-bottom: calc((100vw - 320px)/(1280 - 320)*(32 - 40) + 40px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .popup-info__image {
+        padding-top: 50px;
+        padding-bottom: 40px;
+    }
+}

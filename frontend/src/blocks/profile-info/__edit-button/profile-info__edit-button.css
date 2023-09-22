@@ -1,0 +1,31 @@
+.profile-info__edit-button {
+    background: url(../../../images/Pensil.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    border: solid #fff 2px;
+    grid-area: edit-button;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.profile-info__edit-button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1280px) {
+    .profile-info__edit-button {
+        width: calc((100vw - 320px)/(1280 - 320)*(24 - 18) + 18px);
+        height: calc((100vw - 320px)/(1280 - 320)*(24 - 18) + 18px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .profile-info__edit-button {
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -1,0 +1,23 @@
+.header__container {
+    max-width: 880px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width: 1280px) {
+    .header__container {
+        margin-left: calc((100vw - 320px)/(1280 - 320)*(0 - 27) + 27px);
+        margin-right: calc((100vw - 320px)/(1280 - 320)*(0 - 27) + 27px);
+        margin-bottom: calc((100vw - 320px)/(1280 - 320)*(40 - 31) + 31px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header__container {
+        margin-left: 27px;
+        margin-right: 27px;
+        margin-bottom: 31px;
+    }
+}

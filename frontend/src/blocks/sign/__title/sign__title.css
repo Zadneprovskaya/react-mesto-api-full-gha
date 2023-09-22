@@ -1,0 +1,34 @@
+.sign__title {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 1280px) {
+    .sign__title {
+        margin-bottom: calc((100vw - 768px)/(1280 - 768)*(20 - 10) + 10px);
+        padding-top: calc((100vw - 768px)/(1280 - 768)*(20 - 0) + 0px);
+        font-size: calc((100vw - 320px)/(1280 - 320)*(24 - 20) + 20px);
+        line-height: calc((100vw - 320px)/(1280 - 320)*(29 - 24) + 24px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sign__title {
+        margin-bottom: 10px;
+        padding-top: 0px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .sign__title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}

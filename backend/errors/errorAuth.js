@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const { UNAUTHORIZED_CODE } = require('../config/config');
 
 class AuthError extends Error {
@@ -7,4 +8,5 @@ class AuthError extends Error {
   }
 }
 
+// eslint-disable-next-line no-undef
 module.exports = AuthError;

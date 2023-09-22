@@ -1,0 +1,24 @@
+.popup__text-error {
+  min-height: 30px;
+  margin: 0px 0px 0px 36px;
+  padding: 0;
+  width: 358px;
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 15px;
+  display: block;
+}
+
+@media screen and (max-width: 1280px) {
+  .popup__text-error {
+      width: calc((100vw - 320px)/(1280 - 320)*(358 - 238) + 238px);
+      margin-left: calc((100vw - 320px)/(1280 - 320)*(36 - 22) + 22px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup__text-error {
+      width: 238px;
+      margin-left: 22px;
+  }
+}

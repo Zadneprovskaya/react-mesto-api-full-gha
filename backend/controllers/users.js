@@ -1,15 +1,23 @@
+// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
+// eslint-disable-next-line no-undef
 const bcrypt = require('bcryptjs');
+// eslint-disable-next-line no-undef
 const jwt = require('jsonwebtoken');
+// eslint-disable-next-line no-undef
 const User = require('../models/user');
+// eslint-disable-next-line no-undef
 const ConflictError = require('../errors/errorConflict');
+// eslint-disable-next-line no-undef
 const RequestError = require('../errors/errorRequest');
+// eslint-disable-next-line no-undef
 const NotFoundError = require('../errors/errorNotFound');
 const {
   RIGHT_CODE,
   CREATED_CODE,
   SALT_COUNT,
   KEY,
+// eslint-disable-next-line no-undef
 } = require('../config/config');
 
 const getUsers = (req, res, next) => {
@@ -120,6 +128,7 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+// eslint-disable-next-line no-undef
 module.exports = {
   getUsers,
   getUser,

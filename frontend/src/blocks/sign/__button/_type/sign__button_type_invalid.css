@@ -1,0 +1,8 @@
+.sign__button_type_invalid {
+    color: rgba(0, 0, 0, .3);
+    border: 2px solid rgba(0, 0, 0, .2);
+}
+
+.sign__button_type_invalid:hover {
+    opacity: 1;
+}

@@ -1,0 +1,20 @@
+.list-of-elements {
+    margin: 0px 200px 66px 200px;
+    max-width: 880px;
+}
+
+@media screen and (max-width: 1280px) {
+    .list-of-elements {
+        margin-bottom: calc((100vw - 320px)/(1280 - 320)*(66 - 48) + 48px);
+        margin-left: calc((100vw - 320px)/(1280 - 320)*(200 - 19) + 19px);
+        margin-right: calc((100vw - 320px)/(1280 - 320)*(200 - 19) + 19px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .list-of-elements {
+        margin-bottom: 48px;
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+}

@@ -1,11 +1,17 @@
+// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
+// eslint-disable-next-line no-undef
 const Card = require('../models/card');
+// eslint-disable-next-line no-undef
 const RequestError = require('../errors/errorRequest');
+// eslint-disable-next-line no-undef
 const NotFoundError = require('../errors/errorNotFound');
+// eslint-disable-next-line no-undef
 const NotOwnerError = require('../errors/errorNotOwner');
 const {
   RIGHT_CODE,
   CREATED_CODE,
+// eslint-disable-next-line no-undef
 } = require('../config/config');
 
 const getCards = (req, res, next) => {
@@ -88,6 +94,7 @@ const dislikeCard = (req, res, next) => {
   return updateLikes(req, res, next, countLikes);
 };
 
+// eslint-disable-next-line no-undef
 module.exports = {
   getCards,
   createCard,

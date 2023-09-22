@@ -1,0 +1,9 @@
+.header__button-properties {
+    margin: 0;
+    padding: 0;
+    background-image: url(../../../images/Line\ 42.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 24px;
+    height: 3px;
+}

@@ -1,0 +1,25 @@
+.sign__input-error {
+    min-height: 30px;
+    margin: 0;
+    padding: 0;
+    width: 358px;
+    color: #ff0000;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+}
+  
+@media screen and (max-width: 418px) {
+    .sign__input-error {
+        width: calc((100vw - 320px)/(418 - 320)*(358 - 260) + 260px);
+        margin-left: calc((100vw - 320px)/(418 - 320)*(0 - 30) + 30px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .sign__input-error {
+        width: 260px;
+        margin-left: 30px;
+    }
+}
+  

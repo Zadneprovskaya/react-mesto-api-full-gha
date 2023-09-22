@@ -1,0 +1,7 @@
+.header__button_type_properties {
+    height: 21px;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    flex-direction: column;
+}

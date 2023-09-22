@@ -1,0 +1,28 @@
+.profile-info__name {
+    margin: 0;
+    max-width: 294px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 114%;
+    color: #fff;
+    grid-area: name;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 960px) {
+    .profile-info__name {
+        font-size: calc((100vw - 320px)/(960 - 320)*(42 - 27) + 27px);
+        line-height: calc((100vw - 320px)/(960 - 320)*(48 - 33) + 33px);
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .prprofile-info__nameofile {
+        font-size: 27px;
+        line-height: 33px;
+    }
+}

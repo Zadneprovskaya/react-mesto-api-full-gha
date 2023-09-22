@@ -1,0 +1,29 @@
+.sign__link {
+    margin: 0 auto;
+    padding: 0;
+    padding-bottom: 80px;
+    text-align: center;
+    width: 358px;
+    height: 17px;
+}
+
+@media screen and (max-width: 1280px) {
+    .sign__link {
+        padding-bottom: calc((100vw - 320px)/(1280 - 320)*(80 - 40) + 40px);
+    }
+}
+
+@media screen and (max-width: 418px) {
+    .sign__link {
+        width: calc((100vw - 320px)/(418 - 320)*(358 - 260) + 260px);
+        margin-left: calc((100vw - 320px)/(418 - 320)*(0 - 30) + 30px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .sign__link {
+        width: 260px;
+        margin-left: 30px;
+        padding-bottom: 40px;
+    }
+}

@@ -1,0 +1,11 @@
+.profile-info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-items: flex-start;
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 16px;
+    grid-template-areas:
+        "name edit-button"
+        "about about";
+}

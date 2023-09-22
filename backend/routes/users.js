@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-undef
 const express = require('express');
+// eslint-disable-next-line no-undef
 const { validateGetUser, validateUpdateProfileInfo, validateUpdateProfileAvatar } = require('../middlewares/validation');
 
 const {
@@ -7,6 +9,7 @@ const {
   updateProfileInfo,
   updateProfileAvatar,
   getCurrentUser,
+// eslint-disable-next-line no-undef
 } = require('../controllers/users');
 
 const userRouter = express.Router();
@@ -26,4 +29,5 @@ userRouter.patch('/users/me', validateUpdateProfileInfo, updateProfileInfo);
 // обновить аватар
 userRouter.patch('/users/me/avatar', validateUpdateProfileAvatar, updateProfileAvatar);
 
+// eslint-disable-next-line no-undef
 module.exports = { userRouter };

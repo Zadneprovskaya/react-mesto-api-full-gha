@@ -1,0 +1,17 @@
+.popup__form {
+  margin: 0;
+  padding: 0;
+  width: 430px;
+}
+
+@media screen and (max-width: 1280px) {
+  .popup__form {
+      width: calc((100vw - 320px)/(1280 - 320)*(430 - 282) + 282px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup__form {
+      width: 282px;
+  }
+}
