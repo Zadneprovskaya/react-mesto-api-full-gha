@@ -7,7 +7,7 @@ const helmet = require('helmet');
 // eslint-disable-next-line no-undef
 const { errors } = require('celebrate');
 // eslint-disable-next-line no-undef
-//const cors = require('cors');
+const cors = require('cors');
 
 const URL = 'mongodb://127.0.0.1:27017/mestodb';
 // eslint-disable-next-line no-undef
@@ -25,7 +25,7 @@ const NotFoundError = require('./errors/errorNotFound');
 // eslint-disable-next-line no-undef
 const auth = require('./middlewares/auth');
 // eslint-disable-next-line no-undef
-const cors = require('./middlewares/cors');
+//const cors = require('./middlewares/cors');
 // eslint-disable-next-line no-undef
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
 // eslint-disable-next-line no-undef
@@ -38,11 +38,12 @@ mongoose.connect(URL, {
   useNewUrlParser: true,
 });
 
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(requestLogger);
 
-app.use(cors);
+//app.use(cors);
 
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
