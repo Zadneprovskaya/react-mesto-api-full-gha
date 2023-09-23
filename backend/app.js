@@ -25,35 +25,14 @@ const NotFoundError = require('./errors/errorNotFound');
 // eslint-disable-next-line no-undef
 const auth = require('./middlewares/auth');
 // eslint-disable-next-line no-undef
+const cors = require('./middlewares/cors');
+// eslint-disable-next-line no-undef
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
 // eslint-disable-next-line no-undef
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const allowedCors = [
-  'https://myeducateproject.nomoredomainsrocks.ru',
-  'http://myeducateproject.nomoredomainsrocks.ru',
-  'localhost:3000'
-];
 
 const app = express();
-/* app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://myeducateproject.nomoredomainsrocks.ru',
-  ],
-  credentials: true,
-  maxAge: 30,
-})); */
-
-
-app.use(function(req, res, next) {
-  const { origin } = req.headers; 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  next();
-});
 
 mongoose.connect(URL, {
   useNewUrlParser: true,
@@ -66,6 +45,7 @@ app.use(requestLogger);
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
 
+app.use(cors);
 app.use(auth);
 
 app.use(userRouter);
