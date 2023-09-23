@@ -38,14 +38,14 @@ export const login = (password, email) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .then((data) => {
+    /* .then((data) => {
       if (data.token) {
         const { token } = data;
         localStorage.setItem('jwt', token);
 
         return token;
       };
-    })
+    }) */
 }
 
 export const checkToken = (token) => {
