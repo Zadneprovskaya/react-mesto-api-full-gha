@@ -87,7 +87,7 @@ const api = new Api({
   } */
   baseUrl: 'https://api.myeducateproject.nomoredomainsrocks.ru',
   headers: {
-    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+    //'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });
