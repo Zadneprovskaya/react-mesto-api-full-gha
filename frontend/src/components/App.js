@@ -63,8 +63,8 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    //const token = localStorage.getItem('token');
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('jwt');
     if (token) {
       checkToken(token)
         .then(data => {
@@ -220,7 +220,7 @@ function App() {
         if (data.token) {
           setEmail(email);
           handleLoggedIn();
-          localStorage.setItem('jwt', data.token);
+          localStorage.setItem('token', data.token);
           navigate('/', { replace: true });
         }
       })
@@ -231,7 +231,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('token');
     setLoggedIn(false);
     setEmail('');
   }
