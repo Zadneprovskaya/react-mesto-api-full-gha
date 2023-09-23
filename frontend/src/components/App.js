@@ -40,6 +40,7 @@ function App() {
     if (!loggedIn) return;
     api.getInitialCards()
       .then((data) => {
+        console.log(data);
         setCards(data);
       })
       .catch(err => {
@@ -51,6 +52,7 @@ function App() {
     if (!loggedIn) return;
     api.getUserData()
       .then((data) => {
+        console.log(data);
         setCurrentUser(data);
       })
       .catch(err => {
@@ -64,6 +66,7 @@ function App() {
       auth.checkToken(token)
         .then(data => {
           if (data) {
+            console.log(data);
             setEmail(data.email);
             handleLoggedIn();
             navigate('/', { replace: true });
