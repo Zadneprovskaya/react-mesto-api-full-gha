@@ -22,7 +22,7 @@ const {
 
 const getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.status(RIGHT_CODE).send({ data: users }))
+    .then((users) => res.status(RIGHT_CODE).send(users))
     .catch(next);
 };
 
@@ -33,7 +33,7 @@ const getUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(`Пользователь по указанному _id (${userId}) не найден`);
     })
-    .then((user) => res.status(RIGHT_CODE).send({ data: user }))
+    .then((user) => res.status(RIGHT_CODE).send(user))
     .catch((e) => {
       if (e instanceof mongoose.Error.CastError) {
         return next(new RequestError('Переданы некорректные данные пользователя'));
@@ -49,7 +49,7 @@ const getCurrentUser = (req, res, next) => {
       throw new NotFoundError('Пользователь с таким id не найден');
     })
     .then((user) => {
-      res.status(RIGHT_CODE).send(user); //res.status(RIGHT_CODE).send({ data: user });
+      res.status(RIGHT_CODE).send(user);
     })
     .catch(next);
 };
@@ -102,7 +102,7 @@ const updateProfile = (req, res, next, newData) => {
     throw new NotFoundError(`Пользователь с указанным _id (${req.user._id}) не найден`);
   })
     .then((user) => {
-      res.status(RIGHT_CODE).send({ data: user });
+      res.status(RIGHT_CODE).send(user);
     })
     .catch(next);
 };

@@ -1,4 +1,3 @@
-//export const BASE_URL = 'https://auth.nomoreparties.co';
 export const BASE_URL = 'https://api.myeducateproject.nomoredomainsrocks.ru';
 
 
@@ -38,14 +37,6 @@ export const login = (password, email) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    /* .then((data) => {
-      if (data.token) {
-        const { token } = data;
-        localStorage.setItem('jwt', token);
-
-        return token;
-      };
-    }) */
 }
 
 export const checkToken = (token) => {
@@ -62,5 +53,4 @@ export const checkToken = (token) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    //.then(data => data)
 } 
