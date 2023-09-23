@@ -9,7 +9,7 @@ class Api {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}, ${res}`)
   }
 
   _request(url, options) {
@@ -17,13 +17,17 @@ class Api {
   }
 
   getUserData() {
-    return this._request(this._userUrl, { headers: this._headers, credentials: 'include' })
+    return this._request(this._userUrl, { 
+      headers: this._headers, 
+      credentials: 'include', 
+    })
   }
 
   saveUserChanges({ name, about }) {
     return this._request(this._userUrl, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         about: about,
@@ -35,6 +39,7 @@ class Api {
     return this._request(`${this._userUrl}/avatar`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: src,
       })
@@ -49,6 +54,7 @@ class Api {
     return this._request(this._cardsUrl, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         link: link,
@@ -59,21 +65,24 @@ class Api {
   removeCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
   }
 
   likedCard(cardId) {
     return this._request(`${this._likesUrl}/${cardId}`, {
       method: 'PUT',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
   }
 
   dislikedCard(cardId) {
     return this._request(`${this._likesUrl}/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
   }
 }

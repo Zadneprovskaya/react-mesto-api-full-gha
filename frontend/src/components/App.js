@@ -40,7 +40,6 @@ function App() {
     if (!loggedIn) return;
     api.getInitialCards()
       .then((data) => {
-        console.log(data);
         setCards(data);
       })
       .catch(err => {
