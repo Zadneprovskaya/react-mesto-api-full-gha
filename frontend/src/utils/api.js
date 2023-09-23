@@ -17,7 +17,7 @@ class Api {
   }
 
   getUserData() {
-    return this._request(this._userUrl, { headers: this._headers })
+    return this._request(this._userUrl, { headers: this._headers, credentials: 'include' })
   }
 
   saveUserChanges({ name, about }) {
