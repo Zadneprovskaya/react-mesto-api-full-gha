@@ -8,7 +8,7 @@ class Api {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}, ${res}`)
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
   }
 
   _request(url, options) {
@@ -80,11 +80,6 @@ class Api {
 }
 
 const api = new Api({
-  /* baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
-  headers: {
-    authorization: 'a1f9f0af-27ca-45f0-9642-1f29074bddcb',
-    'Content-Type': 'application/json'
-  } */
   baseUrl: 'https://api.myeducateproject.nomoredomainsrocks.ru',
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('token')}`,

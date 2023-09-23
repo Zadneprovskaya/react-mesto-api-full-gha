@@ -64,12 +64,10 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    //const token = localStorage.getItem('jwt');
     if (token) {
       checkToken(token)
         .then(data => {
           if (data) {
-            console.log(data);
             setEmail(data.email);
             handleLoggedIn();
             navigate('/', { replace: true });

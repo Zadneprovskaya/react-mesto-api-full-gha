@@ -23,7 +23,7 @@ const getCards = (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user._id })
+  Card.create({ name, link, owner: req.user }) //owner: req.user._id
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
@@ -36,7 +36,7 @@ const createCard = (req, res, next) => {
 
 const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  const ownerId = req.user._id;
+  const ownerId = req.user; //req.user._id
   Card.findById(cardId)
     .orFail(() => {
       throw new NotFoundError(`Карточка с указанным _id (${cardId}) не найдена`);
@@ -85,12 +85,12 @@ const updateLikes = (req, res, next, newData) => {
 };
 
 const likeCard = (req, res, next) => {
-  const countLikes = { $addToSet: { likes: req.user._id } };
+  const countLikes = { $addToSet: { likes: req.user } }; //req.user._id
   return updateLikes(req, res, next, countLikes);
 };
 
 const dislikeCard = (req, res, next) => {
-  const countLikes = { $pull: { likes: req.user._id } };
+  const countLikes = { $pull: { likes: req.user } }; //req.user._id
   return updateLikes(req, res, next, countLikes);
 };
 
