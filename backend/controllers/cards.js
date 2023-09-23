@@ -17,14 +17,14 @@ const {
 const getCards = (req, res, next) => {
   Card.find({})
     .populate(['owner', 'likes'])
-    .then((cards) => res.status(RIGHT_CODE).send({ data: cards }))
+    .then((cards) => res.status(RIGHT_CODE).send(cards)) //{ data: cards }
     .catch(next);
 };
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.status(CREATED_CODE).send({ data: card }))
+    .then((card) => res.status(CREATED_CODE).send(card)) //{ data: card }
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
         next(new RequestError('Переданы некорректные данные id карточки'));
