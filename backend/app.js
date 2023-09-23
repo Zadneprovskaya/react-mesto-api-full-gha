@@ -42,10 +42,12 @@ app.use(helmet());
 app.use(express.json());
 app.use(requestLogger);
 
+app.use(cors);
+
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
 
-app.use(cors);
+
 app.use(auth);
 
 app.use(userRouter);
