@@ -49,7 +49,7 @@ const getCurrentUser = (req, res, next) => {
       throw new NotFoundError('Пользователь с таким id не найден');
     })
     .then((user) => {
-      res.status(RIGHT_CODE).send({ data: user });
+      res.status(RIGHT_CODE).send(user); //res.status(RIGHT_CODE).send({ data: user });
     })
     .catch(next);
 };
