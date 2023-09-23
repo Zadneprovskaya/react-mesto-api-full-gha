@@ -17,7 +17,10 @@ import NotFound from "./NotFound";
 import InfoTooltip from "./InfoTooltip";
 
 import api from '../utils/api.js';
-import * as auth from '../utils/auth.js';
+//import * as auth from '../utils/auth.js';
+import { registration } from '../utils/auth.js';
+import { checkToken } from '../utils/auth.js';
+import { login } from '../utils/auth.js';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -60,9 +63,10 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     if (token) {
-      auth.checkToken(token)
+      checkToken(token)
         .then(data => {
           if (data) {
             console.log(data);
@@ -197,7 +201,7 @@ function App() {
   }
 
   function handleRegister(password, email) {
-    auth.registration(password, email)
+    registration(password, email)
       .then(data => {
         if (data) {
           handleInfoTooltip(true);
@@ -211,12 +215,12 @@ function App() {
   }
 
   function handleLogin(password, email) {
-    auth.login(password, email)
+    login(password, email)
       .then(data => {
         if (data.token) {
           setEmail(email);
           handleLoggedIn();
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('jwt', data.token);
           navigate('/', { replace: true });
         }
       })
@@ -227,7 +231,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
     setLoggedIn(false);
     setEmail('');
   }

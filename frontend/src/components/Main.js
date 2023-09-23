@@ -34,7 +34,7 @@ function Main(props) {
       </section>
       <section className="list-of-elements" aria-label="Список карточек">
         <ul className="elements">
-          {props.cards.slice().reverse().map((card) => (
+          {props.cards.map((card) => (
             <Card
               key={card['_id']}
               card={card}
