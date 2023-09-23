@@ -17,7 +17,6 @@ function Login({ onLogin }) {
     });
 
     function onSubmit(data) {
-        console.log(data);
         onLogin(data.password, data.email);
         reset();
     }

@@ -24,7 +24,6 @@ export const registration = (password, email) => {
 export const login = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -39,12 +38,19 @@ export const login = (password, email) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .then((data) => {
+      if (data.token) {
+        const { token } = data;
+        localStorage.setItem('jwt', token);
+
+        return token;
+      };
+    })
 }
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
@@ -56,4 +62,5 @@ export const checkToken = (token) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .then(data => data)
 } 

@@ -1,4 +1,3 @@
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -18,8 +17,7 @@ class Api {
 
   getUserData() {
     return this._request(this._userUrl, { 
-      headers: this._headers, 
-      credentials: 'include', 
+      headers: this._headers
     })
   }
 
@@ -27,7 +25,6 @@ class Api {
     return this._request(this._userUrl, {
       method: 'PATCH',
       headers: this._headers,
-      credentials: 'include',
       body: JSON.stringify({
         name: name,
         about: about,
@@ -39,7 +36,6 @@ class Api {
     return this._request(`${this._userUrl}/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      credentials: 'include',
       body: JSON.stringify({
         avatar: src,
       })
@@ -54,7 +50,6 @@ class Api {
     return this._request(this._cardsUrl, {
       method: 'POST',
       headers: this._headers,
-      credentials: 'include',
       body: JSON.stringify({
         name: name,
         link: link,
@@ -65,24 +60,21 @@ class Api {
   removeCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-      credentials: 'include',
+      headers: this._headers
     })
   }
 
   likedCard(cardId) {
     return this._request(`${this._likesUrl}/${cardId}`, {
       method: 'PUT',
-      headers: this._headers,
-      credentials: 'include',
+      headers: this._headers
     })
   }
 
   dislikedCard(cardId) {
     return this._request(`${this._likesUrl}/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-      credentials: 'include',
+      headers: this._headers
     })
   }
 }
@@ -95,6 +87,7 @@ const api = new Api({
   } */
   baseUrl: 'https://api.myeducateproject.nomoredomainsrocks.ru',
   headers: {
+    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });
