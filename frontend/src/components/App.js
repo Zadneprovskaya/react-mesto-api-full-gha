@@ -69,6 +69,18 @@ function App() {
             navigate('/', { replace: true });
           }
         });
+
+        Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
     }
   }, [navigate]);
 
@@ -181,7 +193,7 @@ function App() {
 
   function handleAddPlaceSubmit(cardData) {
     setRenderLoading(true);
-    
+
     /* api.postNewCard(cardData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
