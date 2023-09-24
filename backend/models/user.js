@@ -1,17 +1,12 @@
-// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
-// eslint-disable-next-line no-undef
 const validator = require('validator');
-// eslint-disable-next-line no-undef
 const bcrypt = require('bcryptjs');
-// eslint-disable-next-line no-undef
 const AuthError = require('../errors/errorAuth');
 
 const {
   DEFAULT_NAME,
   DEFAULT_ABOUT,
   DEFAULT_AVATAR,
-// eslint-disable-next-line no-undef
 } = require('../config/config');
 
 const userSchema = new mongoose.Schema(
@@ -55,7 +50,6 @@ const userSchema = new mongoose.Schema(
   { versionKey: false },
 );
 
-// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   // попытаемся найти пользователя по почте
   return this.findOne({ email }).select('+password')
@@ -74,5 +68,4 @@ userSchema.statics.findUserByCredentials = function (email, password) {
     });
 };
 
-// eslint-disable-next-line no-undef
 module.exports = mongoose.model('user', userSchema);

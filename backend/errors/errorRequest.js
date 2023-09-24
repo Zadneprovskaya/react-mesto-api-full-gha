@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { ERROR_CODE } = require('../config/config');
 
 class RequestError extends Error {
@@ -8,5 +7,4 @@ class RequestError extends Error {
   }
 }
 
-// eslint-disable-next-line no-undef
 module.exports = RequestError;

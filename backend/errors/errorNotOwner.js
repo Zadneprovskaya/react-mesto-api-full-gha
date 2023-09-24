@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { NOT_OWNER_CODE } = require('../config/config');
 
 class NotOwnerError extends Error {
@@ -9,5 +8,4 @@ class NotOwnerError extends Error {
   }
 }
 
-// eslint-disable-next-line no-undef
 module.exports = NotOwnerError;

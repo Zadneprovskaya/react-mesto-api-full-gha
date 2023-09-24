@@ -1,11 +1,7 @@
-// eslint-disable-next-line no-undef
 const jwt = require('jsonwebtoken');
-// eslint-disable-next-line no-undef
 const AuthError = require('../errors/errorAuth');
-// eslint-disable-next-line no-undef
 const { KEY } = require('../config/config');
 
-// eslint-disable-next-line no-undef
 module.exports = (req, res, next) => {
   // достаём авторизационный заголовок
   const { authorization } = req.headers;

@@ -38,6 +38,7 @@ function EditAvatarPopup(props) {
       {...register("avatar", {
         required: "Поле не может быть пустым",
         pattern: {
+          // eslint-disable-next-line
           value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
           message: "Должна быть ссылка"
         }

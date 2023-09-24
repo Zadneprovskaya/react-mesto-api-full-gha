@@ -1,17 +1,11 @@
-// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
-// eslint-disable-next-line no-undef
 const Card = require('../models/card');
-// eslint-disable-next-line no-undef
 const RequestError = require('../errors/errorRequest');
-// eslint-disable-next-line no-undef
 const NotFoundError = require('../errors/errorNotFound');
-// eslint-disable-next-line no-undef
 const NotOwnerError = require('../errors/errorNotOwner');
 const {
   RIGHT_CODE,
   CREATED_CODE,
-// eslint-disable-next-line no-undef
 } = require('../config/config');
 
 const getCards = (req, res, next) => {
@@ -23,7 +17,7 @@ const getCards = (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user._id }) //owner: req.user._id
+  Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
@@ -94,7 +88,6 @@ const dislikeCard = (req, res, next) => {
   return updateLikes(req, res, next, countLikes);
 };
 
-// eslint-disable-next-line no-undef
 module.exports = {
   getCards,
   createCard,

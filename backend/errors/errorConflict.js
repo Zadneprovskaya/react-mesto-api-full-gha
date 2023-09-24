@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { CONFLICT_CODE } = require('../config/config');
 
 class ConflictError extends Error {
@@ -8,5 +7,4 @@ class ConflictError extends Error {
   }
 }
 
-// eslint-disable-next-line no-undef
 module.exports = ConflictError;

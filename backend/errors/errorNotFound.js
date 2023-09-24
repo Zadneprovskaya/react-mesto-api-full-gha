@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { NOT_FOUND_CODE } = require('../config/config');
 
 class NotFoundError extends Error {
@@ -8,5 +7,4 @@ class NotFoundError extends Error {
   }
 }
 
-// eslint-disable-next-line no-undef
 module.exports = NotFoundError;

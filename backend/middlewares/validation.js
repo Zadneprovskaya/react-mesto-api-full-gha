@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-undef
 const { celebrate, Joi } = require('celebrate');
-// eslint-disable-next-line no-undef
 const { REGULAR_URL, REGULAR_ID } = require('../config/config');
 
 const validateLogin = celebrate({
@@ -52,7 +50,6 @@ const validateUpdateCard = celebrate({
   }),
 });
 
-// eslint-disable-next-line no-undef
 module.exports = {
   validateLogin,
   validateCreateUser,

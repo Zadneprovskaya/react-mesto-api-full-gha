@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
-// eslint-disable-next-line no-undef
 const validator = require('validator');
 
 const cardSchema = new mongoose.Schema(
@@ -41,5 +39,4 @@ const cardSchema = new mongoose.Schema(
   { versionKey: false },
 );
 
-// eslint-disable-next-line no-undef
 module.exports = mongoose.model('card', cardSchema);

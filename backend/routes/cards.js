@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-undef
 const express = require('express');
-// eslint-disable-next-line no-undef
 const { validateCreateCard, validateUpdateCard } = require('../middlewares/validation');
 
 const {
@@ -9,7 +7,6 @@ const {
   deleteCard,
   likeCard,
   dislikeCard,
-// eslint-disable-next-line no-undef
 } = require('../controllers/cards');
 
 const cardRouter = express.Router();
@@ -29,5 +26,4 @@ cardRouter.put('/cards/likes/:cardId', validateUpdateCard, likeCard);
 // убрать лайк с карточки по _id
 cardRouter.delete('/cards/likes/:cardId', validateUpdateCard, dislikeCard);
 
-// eslint-disable-next-line no-undef
 module.exports = { cardRouter };

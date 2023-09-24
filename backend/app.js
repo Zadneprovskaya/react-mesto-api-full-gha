@@ -1,32 +1,18 @@
-// eslint-disable-next-line no-undef
 const express = require('express');
-// eslint-disable-next-line no-undef
 const mongoose = require('mongoose');
-// eslint-disable-next-line no-undef
 const helmet = require('helmet');
-// eslint-disable-next-line no-undef
 const { errors } = require('celebrate');
-// eslint-disable-next-line no-undef
 const cors = require('cors');
 
 const URL = 'mongodb://127.0.0.1:27017/mestodb';
-// eslint-disable-next-line no-undef
 const { PORT = 3000 } = process.env;
-// eslint-disable-next-line no-undef
 const { userRouter } = require('./routes/users');
-// eslint-disable-next-line no-undef
 const { cardRouter } = require('./routes/cards');
-// eslint-disable-next-line no-undef
 const { ERROR_DEFAULT_CODE } = require('./config/config');
-// eslint-disable-next-line no-undef
 const { createUser, login } = require('./controllers/users');
-// eslint-disable-next-line no-undef
 const NotFoundError = require('./errors/errorNotFound');
-// eslint-disable-next-line no-undef
 const auth = require('./middlewares/auth');
-// eslint-disable-next-line no-undef
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
-// eslint-disable-next-line no-undef
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 
@@ -40,6 +26,12 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(requestLogger);
+
+/* app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});  */
 
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
@@ -71,6 +63,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });

@@ -39,7 +39,6 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    //if (!loggedIn) return;
     if (loggedIn) {
 
       setRenderLoading(true);
@@ -58,7 +57,6 @@ function App() {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    //if (!loggedIn) return;
     if (loggedIn) {
 
       setRenderLoading(true);
@@ -87,14 +85,6 @@ function App() {
             navigate('/', { replace: true });
           }
         });
-
-        Promise.all([ api.getUserData(), api.getInitialCards() ])
-        .then(res => {
-          const [ userData, cardsArray ] = res;
-          setCards(cardsArray);
-          setCurrentUser(userData);
-        })
-        .catch(err => console.log(err));
     }
   }, [navigate]);
 
