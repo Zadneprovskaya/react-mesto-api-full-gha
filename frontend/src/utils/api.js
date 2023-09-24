@@ -4,7 +4,7 @@ class Api {
     this._headers = headers;
     this._userUrl = `${this._baseUrl}/users/me`;
     this._cardsUrl = `${this._baseUrl}/cards`;
-    this._likesUrl = `${this._baseUrl}/cards/likes`;
+    //this._likesUrl = `${this._baseUrl}/cards/likes`;
   }
 
   _checkResponse(res) {
@@ -65,14 +65,14 @@ class Api {
   }
 
   likedCard(cardId) {
-    return this._request(`${this._likesUrl}/${cardId}`, {
+    return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
   }
 
   dislikedCard(cardId) {
-    return this._request(`${this._likesUrl}/${cardId}`, {
+    return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })

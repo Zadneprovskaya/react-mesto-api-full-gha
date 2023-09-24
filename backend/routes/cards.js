@@ -21,9 +21,9 @@ cardRouter.post('/cards', validateCreateCard, createCard);
 cardRouter.delete('/cards/:cardId', validateUpdateCard, deleteCard);
 
 // поставить лайк карточке по _id
-cardRouter.put('/cards/likes/:cardId', validateUpdateCard, likeCard);
+cardRouter.put('/cards/:cardId/likes', validateUpdateCard, likeCard);
 
 // убрать лайк с карточки по _id
-cardRouter.delete('/cards/likes/:cardId', validateUpdateCard, dislikeCard);
+cardRouter.delete('/cards/:cardId/likes', validateUpdateCard, dislikeCard);
 
 module.exports = { cardRouter };

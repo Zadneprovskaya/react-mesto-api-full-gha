@@ -16,7 +16,6 @@ const auth = require('./middlewares/auth');
 const { validateLogin, validateCreateUser } = require('./middlewares/validation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-
 const app = express();
 
 mongoose.connect(URL, {
@@ -36,7 +35,6 @@ app.use(requestLogger);
 
 app.post('/signin', validateLogin, login);
 app.post('/signup', validateCreateUser, createUser);
-
 
 app.use(auth);
 
@@ -64,5 +62,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });

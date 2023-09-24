@@ -116,9 +116,8 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      //const token = jwt.sign({ _id: user._id }, KEY, { expiresIn: '7d' });
-      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : KEY, { expiresIn: '7d' },
-      );
+      // const token = jwt.sign({ _id: user._id }, KEY, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : KEY, { expiresIn: '7d' });
       res.status(RIGHT_CODE).send({ token });
     })
     .catch(next);

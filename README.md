@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.108.17
+IP 51.250.108.17
 
 Frontend https://myeducateproject.nomoredomainsrocks.ru
 
