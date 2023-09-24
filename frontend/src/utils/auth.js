@@ -53,4 +53,5 @@ export const checkToken = (token) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .then(data => data)
 } 

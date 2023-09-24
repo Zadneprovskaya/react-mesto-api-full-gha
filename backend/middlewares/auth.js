@@ -17,7 +17,8 @@ module.exports = (req, res, next) => {
 
   try {
     // попытаемся верифицировать токен
-    payload = jwt.verify(token, NODE_ENV === 'production' ? SECRET_SIGNING_KEY : KEY);
+    //payload = jwt.verify(token, NODE_ENV === 'production' ? SECRET_SIGNING_KEY : KEY);
+    payload = jwt.verify(token, KEY);
   } catch (e) {
     // отправим ошибку, если не получилось
     return next(new AuthError('Необходима авторизация'));
