@@ -54,7 +54,6 @@ function App() {
     if (!loggedIn) return;
     api.getUserData()
       .then((data) => {
-        console.log(data);
         setCurrentUser(data);
       })
       .catch(err => {
