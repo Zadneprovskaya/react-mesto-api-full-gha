@@ -38,7 +38,7 @@ function App() {
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     if (loggedIn) {
 
       setRenderLoading(true);
@@ -55,7 +55,7 @@ function App() {
           setRenderLoading(false);
         })
     };
-  }, [loggedIn]);
+  }, [loggedIn]); */
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -64,7 +64,7 @@ function App() {
         .then(data => {
           if (data) {
             setEmail(data.email);
-            setCurrentUser(data);
+            //setCurrentUser(data);
             handleLoggedIn();
             navigate('/', { replace: true });
           }
@@ -194,7 +194,7 @@ function App() {
   function handleAddPlaceSubmit(cardData) {
     setRenderLoading(true);
 
-    /* api.postNewCard(cardData)
+    api.postNewCard(cardData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -204,19 +204,7 @@ function App() {
       })
       .finally(() => {
         setRenderLoading(false);
-      }); */
-
-    api.postNewCard(cardData.name, cardData.link)
-      .then((card) => {
-        setCards([...cards, card]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`Ошибка в процессе добавления новой карточки в галерею: ${err}`);
-      })
-      .finally(() => {
-        setRenderLoading(false);
-      })
+      });
   }
 
   function handleRegister(password, email) {
@@ -243,6 +231,7 @@ function App() {
       .then(data => {
         if (data) {
           setEmail(email);
+          setCurrentUser(data);
           handleLoggedIn();
           navigate('/', { replace: true });
         }
@@ -257,7 +246,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('token');
+    localStorage.clear('token');
     setLoggedIn(false);
     setEmail('');
   }

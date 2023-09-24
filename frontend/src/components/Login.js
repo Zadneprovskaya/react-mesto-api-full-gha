@@ -7,7 +7,7 @@ function Login({ onLogin }) {
         register,
         formState: { errors, isValid },
         handleSubmit,
-        reset
+        //reset
     } = useForm({
         mode: "onBlur",
         values: {
@@ -18,7 +18,7 @@ function Login({ onLogin }) {
 
     function onSubmit(data) {
         onLogin(data.password, data.email);
-        reset();
+        //reset();
     }
 
     return (
