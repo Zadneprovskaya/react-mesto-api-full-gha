@@ -231,7 +231,7 @@ function App() {
           setEmail(email);
           handleLoggedIn();
           localStorage.setItem('token', data.token);
-          navigate('/', { replace: true });
+          navigate('../', { replace: true });
         }
       })
       .catch(err => {
