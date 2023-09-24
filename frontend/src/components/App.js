@@ -39,25 +39,41 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!loggedIn) return;
-    api.getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    //if (!loggedIn) return;
+    if (loggedIn) {
+
+      setRenderLoading(true);
+
+      api.getInitialCards()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
+    };
   }, [loggedIn]);
 
   React.useEffect(() => {
-    if (!loggedIn) return;
-    api.getUserData()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    //if (!loggedIn) return;
+    if (loggedIn) {
+
+      setRenderLoading(true);
+      
+      api.getUserData()
+        .then((data) => {
+          setCurrentUser(data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
+    };
   }, [loggedIn]);
 
   React.useEffect(() => {
