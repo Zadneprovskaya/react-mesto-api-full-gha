@@ -23,7 +23,7 @@ const getCards = (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user }) //owner: req.user._id
+  Card.create({ name, link, owner: req.user._id }) //owner: req.user._id
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
@@ -64,7 +64,7 @@ const deleteCard = (req, res, next) => {
 
 const updateLikes = (req, res, next, newData) => {
   Card.findByIdAndUpdate(
-    req.params, //req.params.cardId,
+    req.params.cardId, //req.params.cardId,
     newData,
     { new: true },
   )
@@ -85,12 +85,12 @@ const updateLikes = (req, res, next, newData) => {
 };
 
 const likeCard = (req, res, next) => {
-  const countLikes = { $addToSet: { likes: req.user } }; //req.user._id
+  const countLikes = { $addToSet: { likes: req.user._id } }; //req.user._id
   return updateLikes(req, res, next, countLikes);
 };
 
 const dislikeCard = (req, res, next) => {
-  const countLikes = { $pull: { likes: req.user } }; //req.user._id
+  const countLikes = { $pull: { likes: req.user._id } }; //req.user._id
   return updateLikes(req, res, next, countLikes);
 };
 
