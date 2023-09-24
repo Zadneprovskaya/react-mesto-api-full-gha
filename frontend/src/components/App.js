@@ -38,7 +38,7 @@ function App() {
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     if (loggedIn) {
 
       setRenderLoading(true);
@@ -54,19 +54,31 @@ function App() {
           setRenderLoading(false);
         })
     };
-  }, [loggedIn]);
+  }, [loggedIn]); */
 
   React.useEffect(() => {
     if (loggedIn) {
 
       setRenderLoading(true);
       
-      api.getUserData()
+      /* api.getUserData()
         .then((data) => {
           setCurrentUser(data);
         })
         .catch(err => {
           console.log(err);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        }) */
+
+        Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
         })
         .finally(() => {
           setRenderLoading(false);
