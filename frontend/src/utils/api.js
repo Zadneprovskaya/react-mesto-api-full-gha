@@ -4,7 +4,6 @@ class Api {
     this._headers = headers;
     this._userUrl = `${this._baseUrl}/users/me`;
     this._cardsUrl = `${this._baseUrl}/cards`;
-    //this._likesUrl = `${this._baseUrl}/cards/likes`;
   }
 
   _checkResponse(res) {
