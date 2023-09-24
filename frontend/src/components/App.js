@@ -211,6 +211,7 @@ function App() {
   }
 
   function handleRegister(password, email) {
+    setRenderLoading(true);
     registration(password, email)
       .then(data => {
         if (data) {
@@ -222,22 +223,29 @@ function App() {
         console.log(err);
         handleInfoTooltip(false);
       })
+      .finally(() => {
+        setRenderLoading(false);
+      });
   }
 
   function handleLogin(password, email) {
+    setRenderLoading(true);
     login(password, email)
       .then(data => {
-        if (data.token) {
-          setEmail(email);
+        if (data) {
+          //setEmail(email);
           handleLoggedIn();
           //localStorage.setItem('token', data.token);
-          navigate('../', { replace: true });
+          navigate('/', { replace: true });
         }
       })
       .catch(err => {
         handleInfoTooltip(false);
         console.log(err);
       })
+      .finally(() => {
+        setRenderLoading(false);
+      });
   }
 
   function handleSignOut() {
