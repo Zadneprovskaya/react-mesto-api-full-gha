@@ -24,10 +24,10 @@ cardRouter.post('/cards', validateCreateCard, createCard);
 cardRouter.delete('/cards/:cardId', validateUpdateCard, deleteCard);
 
 // поставить лайк карточке по _id
-cardRouter.put('/cards/:cardId/likes', validateUpdateCard, likeCard);
+cardRouter.put('/cards/likes/:cardId', validateUpdateCard, likeCard);
 
 // убрать лайк с карточки по _id
-cardRouter.delete('/cards/:cardId/likes', validateUpdateCard, dislikeCard);
+cardRouter.delete('/cards/likes/:cardId', validateUpdateCard, dislikeCard);
 
 // eslint-disable-next-line no-undef
 module.exports = { cardRouter };
