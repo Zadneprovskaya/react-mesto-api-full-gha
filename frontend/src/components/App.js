@@ -17,7 +17,6 @@ import NotFound from "./NotFound";
 import InfoTooltip from "./InfoTooltip";
 
 import api from '../utils/api.js';
-//import * as auth from '../utils/auth.js';
 import { registration } from '../utils/auth.js';
 import { checkToken } from '../utils/auth.js';
 import { login } from '../utils/auth.js';
@@ -71,7 +70,15 @@ function App() {
             handleLoggedIn();
             navigate('/', { replace: true });
           }
+        });
+
+        Promise.all([ api.getUserData(), api.getInitialCards() ])
+        .then(res => {
+          const [ userData, cardsArray ] = res;
+          setCards(cardsArray);
+          setCurrentUser(userData);
         })
+        .catch(err => console.log(err));
     }
   }, [navigate]);
 

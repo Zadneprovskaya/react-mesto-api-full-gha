@@ -43,7 +43,7 @@ const getUser = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  const userId = req.user._id; //req.user._id
+  const userId = req.user._id;
   User.findById(userId)
     .orFail(() => {
       throw new NotFoundError('Пользователь с таким id не найден');
@@ -91,7 +91,7 @@ const createUser = (req, res, next) => {
 
 const updateProfile = (req, res, next, newData) => {
   User.findByIdAndUpdate(
-    req.user._id, //req.user._id
+    req.user._id,
     newData,
     {
       new: true,

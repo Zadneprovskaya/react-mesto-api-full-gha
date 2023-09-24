@@ -35,9 +35,9 @@ const createCard = (req, res, next) => {
 };
 
 const deleteCard = (req, res, next) => {
-  const { cardId } = req.params; //{ cardId }
-  const ownerId  = req.user._id; //req.user._id
-  Card.findById(cardId) //cardId
+  const { cardId } = req.params;
+  const ownerId  = req.user._id;
+  Card.findById(cardId)
     .orFail(() => {
       throw new NotFoundError(`Карточка с указанным _id (${cardId}) не найдена`);
     })
@@ -64,7 +64,7 @@ const deleteCard = (req, res, next) => {
 
 const updateLikes = (req, res, next, newData) => {
   Card.findByIdAndUpdate(
-    req.params.cardId, //req.params.cardId,
+    req.params.cardId,
     newData,
     { new: true },
   )
@@ -85,12 +85,12 @@ const updateLikes = (req, res, next, newData) => {
 };
 
 const likeCard = (req, res, next) => {
-  const countLikes = { $addToSet: { likes: req.user._id } }; //req.user._id
+  const countLikes = { $addToSet: { likes: req.user._id } };
   return updateLikes(req, res, next, countLikes);
 };
 
 const dislikeCard = (req, res, next) => {
-  const countLikes = { $pull: { likes: req.user._id } }; //req.user._id
+  const countLikes = { $pull: { likes: req.user._id } };
   return updateLikes(req, res, next, countLikes);
 };
 
