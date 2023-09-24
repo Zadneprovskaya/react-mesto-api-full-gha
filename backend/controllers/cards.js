@@ -9,7 +9,7 @@ const {
 } = require('../config/config');
 
 const getCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .populate(['owner', 'likes'])
     .then((cards) => res.status(RIGHT_CODE).send(cards))
     .catch(next);
@@ -21,7 +21,7 @@ const createCard = (req, res, next) => {
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
-        next(new RequestError('Переданы некорректные данные id карточки'));
+        next(new RequestError('Переданы некорректные данные карточки'));
       } else {
         next(e);
       }

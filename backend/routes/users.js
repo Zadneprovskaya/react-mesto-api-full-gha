@@ -5,7 +5,6 @@ const {
   getUsers,
   getUser,
   updateProfileInfo,
-  updateProfileAvatar,
   getCurrentUser,
 } = require('../controllers/users');
 
@@ -24,6 +23,6 @@ userRouter.get('/users/:userId', validateGetUser, getUser);
 userRouter.patch('/users/me', validateUpdateProfileInfo, updateProfileInfo);
 
 // обновить аватар
-userRouter.patch('/users/me/avatar', validateUpdateProfileAvatar, updateProfileAvatar);
+userRouter.patch('/users/me/avatar', validateUpdateProfileAvatar, updateProfileInfo);
 
 module.exports = { userRouter };
