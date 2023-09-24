@@ -233,9 +233,9 @@ function App() {
     login(password, email)
       .then(data => {
         if (data) {
-          //setEmail(email);
+          setEmail(email);
           handleLoggedIn();
-          //localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.token);
           navigate('/', { replace: true });
         }
       })
