@@ -102,18 +102,9 @@ const updateProfile = (req, res, next, newData) => {
 };
 
 const updateProfileInfo = (req, res, next) => {
-  // eslint-disable-next-line spaced-comment
-  //const { name, about } = req.body;
   const newData = req.body;
   return updateProfile(req, res, next, newData);
-  // eslint-disable-next-line spaced-comment
-  //{ name, about }
 };
-
-/* const updateProfileAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  return updateProfile(req, res, next, { avatar });
-}; */
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
