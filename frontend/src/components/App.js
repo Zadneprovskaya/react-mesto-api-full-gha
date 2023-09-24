@@ -235,7 +235,7 @@ function App() {
         if (data) {
           setEmail(email);
           handleLoggedIn();
-          localStorage.setItem('token', data.token);
+          //localStorage.setItem('token', data.token);
           navigate('/', { replace: true });
         }
       })
