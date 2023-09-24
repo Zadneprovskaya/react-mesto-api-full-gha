@@ -38,25 +38,6 @@ function App() {
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
-  /* React.useEffect(() => {
-    if (loggedIn) {
-
-      setRenderLoading(true);
-      
-        Promise.all([api.getUserData(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    };
-  }, [loggedIn]); */
-
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -64,7 +45,7 @@ function App() {
         .then(data => {
           if (data) {
             setEmail(data.email);
-            //setCurrentUser(data);
+            setCurrentUser(data);
             handleLoggedIn();
             navigate('/', { replace: true });
           }
@@ -84,6 +65,48 @@ function App() {
     }
   }, [navigate]);
 
+  React.useEffect(() => {
+    if (loggedIn) {
+    api.getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    };
+  }, [loggedIn]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+    api.getUserData()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    };
+  }, [loggedIn]);
+
+  /* React.useEffect(() => {
+    if (loggedIn) {
+
+      setRenderLoading(true);
+      
+        Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
+    };
+  }, [loggedIn]); */
 
   function handleLoggedIn() {
     setLoggedIn(true);
