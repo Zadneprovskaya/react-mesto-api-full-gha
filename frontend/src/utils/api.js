@@ -45,7 +45,7 @@ class Api {
     return this._request(this._cardsUrl, { headers: this._headers })
   }
 
-  postNewCard({ name, link }) {
+  /* postNewCard({ name, link }) {
     return this._request(this._cardsUrl, {
       method: 'POST',
       headers: this._headers,
@@ -54,7 +54,15 @@ class Api {
         link: link,
       })
     })
-  }
+  } */
+
+  postNewCard(name, link) {
+    return this._request(this._cardsUrl, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name, link })
+    });
+  };
 
   removeCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}`, {
