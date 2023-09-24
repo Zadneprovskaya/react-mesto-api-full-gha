@@ -38,40 +38,11 @@ function App() {
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
-  /* React.useEffect(() => {
-    if (loggedIn) {
-
-      setRenderLoading(true);
-
-      api.getInitialCards()
-        .then((data) => {
-          setCards(data);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    };
-  }, [loggedIn]); */
-
   React.useEffect(() => {
     if (loggedIn) {
 
       setRenderLoading(true);
       
-      /* api.getUserData()
-        .then((data) => {
-          setCurrentUser(data);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        }) */
-
         Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([user, cards]) => {
           setCurrentUser(user);
@@ -93,6 +64,7 @@ function App() {
         .then(data => {
           if (data) {
             setEmail(data.email);
+            setCurrentUser(data);
             handleLoggedIn();
             navigate('/', { replace: true });
           }
