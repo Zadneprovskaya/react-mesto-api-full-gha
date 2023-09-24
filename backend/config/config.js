@@ -1,5 +1,5 @@
 const { NODE_ENV } = process.env;
-const { SECRET_SIGNING_KEY } = process.env;
+const { JWT_SECRET } = process.env;
 const RIGHT_CODE = 200;
 const CREATED_CODE = 201;
 const ERROR_CODE = 400;
@@ -18,7 +18,7 @@ const REGULAR_ID = /^[0-9a-fA-F]{24}$/;
 
 module.exports = {
   NODE_ENV,
-  SECRET_SIGNING_KEY,
+  JWT_SECRET,
   RIGHT_CODE,
   CREATED_CODE,
   ERROR_CODE,
