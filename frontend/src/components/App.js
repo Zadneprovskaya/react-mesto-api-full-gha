@@ -39,6 +39,7 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    setRenderLoading(true);
     const token = localStorage.getItem('token');
     if (token) {
       checkToken(token)
@@ -66,6 +67,7 @@ function App() {
   }, [navigate]);
 
   React.useEffect(() => {
+    setRenderLoading(true);
     if (loggedIn) {
     api.getInitialCards()
       .then((data) => {
@@ -74,10 +76,14 @@ function App() {
       .catch(err => {
         console.log(err);
       })
+      .finally(() => {
+        setRenderLoading(false);
+      })
     };
   }, [loggedIn]);
 
   React.useEffect(() => {
+    setRenderLoading(true);
     if (loggedIn) {
     api.getUserData()
       .then((data) => {
@@ -86,27 +92,11 @@ function App() {
       .catch(err => {
         console.log(err);
       })
+      .finally(() => {
+        setRenderLoading(false);
+      })
     };
   }, [loggedIn]);
-
-  /* React.useEffect(() => {
-    if (loggedIn) {
-
-      setRenderLoading(true);
-      
-        Promise.all([api.getUserData(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    };
-  }, [loggedIn]); */
 
   function handleLoggedIn() {
     setLoggedIn(true);
