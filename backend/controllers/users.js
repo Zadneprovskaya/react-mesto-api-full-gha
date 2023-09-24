@@ -10,6 +10,8 @@ const {
   CREATED_CODE,
   SALT_COUNT,
   KEY,
+  NODE_ENV,
+  SECRET_SIGNING_KEY,
 } = require('../config/config');
 
 const getUsers = (req, res, next) => {
@@ -114,7 +116,9 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, KEY, { expiresIn: '7d' });
+      //const token = jwt.sign({ _id: user._id }, KEY, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? SECRET_SIGNING_KEY : KEY, { expiresIn: '7d' },
+      );
       res.status(RIGHT_CODE).send({ token });
     })
     .catch(next);
