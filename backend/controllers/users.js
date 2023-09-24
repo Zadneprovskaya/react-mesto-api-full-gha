@@ -105,7 +105,7 @@ const updateProfileInfo = (req, res, next) => {
   // eslint-disable-next-line spaced-comment
   //const { name, about } = req.body;
   const newData = req.body;
-  return updateProfile(req, res, next, { newData });
+  return updateProfile(req, res, next, newData);
   // eslint-disable-next-line spaced-comment
   //{ name, about }
 };
