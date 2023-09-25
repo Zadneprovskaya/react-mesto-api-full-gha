@@ -224,9 +224,9 @@ function App() {
 
   function handleCardDelete(card) {
     setRenderLoading(true);
-    api.removeCard(card) //card._id
+    api.removeCard(card._id)
       .then(() => {
-        setCards((state) => state.filter((item) => item._id !== card)); //card._id
+        setCards((state) => state.filter((item) => item._id !== card._id));
         closeAllPopups();
       })
       .catch(err => {
@@ -272,6 +272,7 @@ function App() {
 
     api.postNewCard(cardData)
       .then((newCard) => {
+        console.log(newCard);
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
@@ -306,6 +307,7 @@ function App() {
     login(password, email)
       .then(data => {
         if (data) {
+          console.log(data);
           setEmail(email);
           setCurrentUser(data);
           handleLoggedIn();
