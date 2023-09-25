@@ -87,6 +87,7 @@ function App() {
 
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([user, cards]) => {
+          console.log(`Promise: ${user}`);
           setCurrentUser(user);
           setCards(cards);
         })
@@ -310,6 +311,7 @@ function App() {
           console.log(`login в data возвращает: ${data}`);
           setEmail(email);
           setCurrentUser(data);
+          api.getUserData();
           handleLoggedIn();
           navigate('/', { replace: true });
         }
