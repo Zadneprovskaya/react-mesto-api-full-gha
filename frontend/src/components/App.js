@@ -65,6 +65,7 @@ function App() {
             email
           };
           console.log(`useCallback -> checkToken -> userData: ${userData}`);
+          setEmail(userData.email);
           setUserData(userData);
           handleLoggedIn();
           navigate('/', { replace: true });
