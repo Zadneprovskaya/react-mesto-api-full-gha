@@ -58,7 +58,6 @@ export const checkToken = (token) => {
   })
     .then(res => {
       if (res.ok) {
-        console.log(`checkToken: ${res}`);
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);

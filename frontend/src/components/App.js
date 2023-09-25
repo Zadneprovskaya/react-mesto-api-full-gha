@@ -64,6 +64,7 @@ function App() {
             _id,
             email
           };
+          console.log(`useCallback -> checkToken -> userData: ${userData}`);
           setUserData(userData);
           handleLoggedIn();
           navigate('/', { replace: true });
@@ -87,7 +88,7 @@ function App() {
 
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([user, cards]) => {
-          console.log(`Promise: ${user}`);
+          console.log(`Promise: ${[user, cards]}`);
           setCurrentUser(user);
           setCards(cards);
         })
