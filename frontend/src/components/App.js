@@ -307,7 +307,7 @@ function App() {
     login(password, email)
       .then(data => {
         if (data) {
-          console.log(data);
+          console.log(`login в data возвращает: ${data}`);
           setEmail(email);
           setCurrentUser(data);
           handleLoggedIn();
