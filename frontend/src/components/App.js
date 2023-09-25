@@ -64,7 +64,7 @@ function App() {
             _id,
             email
           };
-          console.log(`useCallback -> checkToken -> userData: ${userData}`);
+          console.log(`useCallback -> checkToken -> userData: ${_id}`);
           setEmail(userData.email);
           setUserData(userData);
           handleLoggedIn();
