@@ -24,10 +24,11 @@ class Api {
     return this._request(this._userUrl, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
+      body: JSON.stringify({ name, about })
+      /* body: JSON.stringify({
         name: name,
         about: about,
-      })
+      }) */
     })
   }
 
@@ -49,10 +50,11 @@ class Api {
     return this._request(this._cardsUrl, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({
+      body: JSON.stringify({ name, link })
+      /* body: JSON.stringify({
         name: name,
         link: link,
-      })
+      }) */
     })
   }
 

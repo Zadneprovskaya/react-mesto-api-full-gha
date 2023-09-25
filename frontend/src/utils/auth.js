@@ -39,6 +39,7 @@ export const login = (password, email) => {
     })
     .then((data) => {
       if (data.token) {
+        console.log(data);
         const { token } = data;
         localStorage.setItem('token', token);
 
@@ -49,10 +50,10 @@ export const login = (password, email) => {
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
+    //method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`, 
     }
   })
     .then(res => {
@@ -61,4 +62,5 @@ export const checkToken = (token) => {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
+    .then(data => data)
 } 

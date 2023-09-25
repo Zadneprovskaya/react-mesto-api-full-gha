@@ -32,13 +32,76 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [renderLoading, setRenderLoading] = React.useState(false);
 
-  const [currentUser, setCurrentUser] = React.useState({});
+  //const [currentUser, setCurrentUser] = React.useState({});
+
+  const [currentUser, setCurrentUser] = React.useState({
+    _id: '',
+    email: '',
+    name: '',
+    about: '',
+    avatar: ''
+  });
+
+  const [userData, setUserData] = React.useState({
+    _id: '',
+    email: ''
+  });
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
+  const getToken = React.useCallback(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      setRenderLoading(true);
+
+      checkToken(token)
+        .then((res) => {
+          const { _id, email } = res;
+          const userData = {
+            _id,
+            email
+          };
+          setUserData(userData);
+          handleLoggedIn();
+          navigate('/', { replace: true });
+        })
+        .catch((err) => {
+          console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
+    };
+  }, [navigate]);
+
   React.useEffect(() => {
+    getToken();
+  }, [getToken]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      setRenderLoading(true);
+
+      Promise.all([api.getUserData(), api.getInitialCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
+        })
+        .finally(() => {
+          setRenderLoading(false);
+        })
+    };
+  }, [loggedIn]);
+
+
+
+ /*  React.useEffect(() => {
     setRenderLoading(true);
     const token = localStorage.getItem('token');
     if (token) {
@@ -96,7 +159,7 @@ function App() {
         setRenderLoading(false);
       })
     };
-  }, [loggedIn]);
+  }, [loggedIn]); */
 
   function handleLoggedIn() {
     setLoggedIn(true);
@@ -161,9 +224,9 @@ function App() {
 
   function handleCardDelete(card) {
     setRenderLoading(true);
-    api.removeCard(card._id)
+    api.removeCard(card) //card._id
       .then(() => {
-        setCards((state) => state.filter((item) => item._id !== card._id));
+        setCards((state) => state.filter((item) => item._id !== card)); //card._id
         closeAllPopups();
       })
       .catch(err => {
@@ -267,7 +330,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Header email={email} onSignOut={handleSignOut} />
+        <Header email={email} onSignOut={handleSignOut} setUserData={setUserData} userData={userData} />
         <Routes>
 
           <Route path="/" element={<ProtectedRoute
