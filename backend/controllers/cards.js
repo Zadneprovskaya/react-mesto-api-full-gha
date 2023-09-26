@@ -65,7 +65,7 @@ const updateLikes = (req, res, next, newData) => {
     .orFail(() => {
       throw new NotFoundError('Карточка не найдена');
     })
-    .populate(['owner', 'likes'])
+    .populate(['likes'])
     .then((card) => {
       res.status(RIGHT_CODE).send(card);
     })
