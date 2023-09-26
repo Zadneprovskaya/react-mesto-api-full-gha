@@ -338,9 +338,12 @@ function App() {
   function handleLogin(password, email) {
     setRenderLoading(true);
     const token = localStorage.getItem('token');
+    console.log(`token: ${token}`);
     login(password, email, token)
       .then(data => {
         if (data) {
+          const token = localStorage.getItem('token');
+          console.log(token);
           console.log(`login в data возвращает: ${data}`);
           setEmail(email);
           setCurrentUser(data);
