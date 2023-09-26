@@ -23,13 +23,13 @@ class Api {
     return fetch(url, options).then(this._checkResponse)
   }
 
-  getUserData(token) {
+  getUserData() {
     return this._request(this._userUrl, { 
-      //headers: this._headers
-      headers: {
+      headers: this._headers
+      /* headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
-      }
+      } */
     })
   }
 
@@ -63,13 +63,13 @@ class Api {
     })
   }
 
-  getInitialCards(token) {
+  getInitialCards() {
     return this._request(this._cardsUrl, { 
-      //headers: this._headers 
-      headers: {
+      headers: this._headers 
+      /* headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
-      },
+      }, */
     })
   }
 

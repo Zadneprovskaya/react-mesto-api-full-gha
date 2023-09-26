@@ -161,8 +161,9 @@ function App() {
   React.useEffect(() => {
     setRenderLoading(true);
     const token = localStorage.getItem('token');
+    console.log(token);
     if (loggedIn) {
-    api.getInitialCards(token)
+    api.getInitialCards()
       .then((data) => {
         setCards(data);
       })
@@ -178,8 +179,9 @@ function App() {
   React.useEffect(() => {
     setRenderLoading(true);
     const token = localStorage.getItem('token');
+    console.log(token);
     if (loggedIn) {
-    api.getUserData(token)
+    api.getUserData()
       .then((data) => {
         setCurrentUser(data);
       })
