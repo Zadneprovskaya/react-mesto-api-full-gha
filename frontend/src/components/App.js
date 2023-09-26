@@ -344,7 +344,7 @@ function App() {
     login(password, email)
       .then(data => {
         if (data) {
-          localStorage.setItem('token',data.token);
+          //localStorage.setItem('token',data.token);
           setEmail(email);
           setCurrentUser(data);
           api.getUserData();
