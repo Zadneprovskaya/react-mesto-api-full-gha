@@ -10,14 +10,14 @@ const {
 
 const getCards = (req, res, next) => {
   Card.find({}).sort({ createdAt: -1 })
-    .populate(['owner', 'likes'])
+    .populate(['likes'])
     .then((cards) => res.status(RIGHT_CODE).send(cards))
     .catch(next);
 };
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user })
+  Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
@@ -35,7 +35,7 @@ const deleteCard = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError(`Карточка с указанным _id (${cardId}) не найдена`);
     })
-    .populate(['owner', 'likes'])
+    .populate(['likes'])
     .then((card) => {
       if (!card.owner.equals(ownerId)) {
         throw new NotOwnerError('Невозможно удалить чужую карточку');
