@@ -79,10 +79,6 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleConfirmDeletionClick(card) {
-    setIsConfirmDeletionPopupOpen({ ...isConfirmDeletionPopupOpen, isOpen: true, card: card });
-  }
-
   function handleInfoTooltip(result) {
     setInfoTooltip({ ...isInfoTooltip, isOpen: true, result: result });
   }
@@ -121,6 +117,10 @@ function App() {
           console.log(err);
         });
     }
+  }
+
+  function handleConfirmDeletionClick(card) {
+    setIsConfirmDeletionPopupOpen({ ...isConfirmDeletionPopupOpen, isOpen: true, card: card });
   }
 
   function handleCardDelete(card) {

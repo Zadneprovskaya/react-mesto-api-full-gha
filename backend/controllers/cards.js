@@ -17,7 +17,7 @@ const getCards = (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user._id })
+  Card.create({ name, link, owner: req.user })
     .then((card) => res.status(CREATED_CODE).send(card))
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {

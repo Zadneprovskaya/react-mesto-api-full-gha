@@ -55,14 +55,14 @@ class Api {
     })
   }
 
-  postNewCard({ name, link }) {
+  postNewCard(cardData) {
     return this._request(this._cardsUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ name, link })
+      body: JSON.stringify(cardData)
     })
   }
 
