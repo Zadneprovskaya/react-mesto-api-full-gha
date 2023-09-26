@@ -34,73 +34,9 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
 
-  /* const [currentUser, setCurrentUser] = React.useState({
-    _id: '',
-    email: '',
-    name: '',
-    about: '',
-    avatar: ''
-  }); */
-
-  /* const [userData, setUserData] = React.useState({
-    _id: '',
-    email: ''
-  }); */
-
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
-
-  /* const getToken = React.useCallback(() => {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      setRenderLoading(true);
-
-      checkToken(token)
-        .then((res) => {
-          const { _id, email } = res;
-          const userData = {
-            _id,
-            email
-          };
-          console.log(`useCallback -> checkToken -> userData: ${_id}`);
-          setEmail(userData.email);
-          setCurrentUser(userData);
-          handleLoggedIn();
-          navigate('/', { replace: true });
-        })
-        .catch((err) => {
-          console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    };
-  }, [navigate]);
-
-  React.useEffect(() => {
-    getToken();
-  }, [getToken]);
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      setRenderLoading(true);
-
-      Promise.all([api.getUserData(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          console.log(`Promise: ${[user, cards]}`);
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    };
-  }, [loggedIn]); */
 
 
   React.useEffect(() => {
@@ -126,72 +62,6 @@ function App() {
     }
   }, [navigate])
 
-
-
- /*  React.useEffect(() => {
-    setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    if (token) {
-      checkToken(token)
-        .then(data => {
-          if (data) {
-            setEmail(data.email);
-            setCurrentUser(data);
-            handleLoggedIn();
-            navigate('/', { replace: true });
-          }
-        });
-
-        Promise.all([api.getUserData(), api.getInitialCards()])
-        .then(([user, cards]) => {
-          setCurrentUser(user);
-          setCards(cards);
-        })
-        .catch((err) => {
-          console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
-        })
-        .finally(() => {
-          setRenderLoading(false);
-        })
-    }
-  }, [navigate]);
-  */
-
-  /* React.useEffect(() => {
-    setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (loggedIn) {
-    api.getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => {
-        setRenderLoading(false);
-      })
-    };
-  }, [loggedIn]);
-
-  React.useEffect(() => {
-    setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (loggedIn) {
-    api.getUserData()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => {
-        setRenderLoading(false);
-      })
-    };
-  }, [loggedIn]);  */
 
   function handleLoggedIn() {
     setLoggedIn(true);
@@ -232,7 +102,6 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    //const token = localStorage.getItem('token');
     if (isLiked) {
       api.dislikedCard(card._id)
         .then((newCard) => {
@@ -256,7 +125,6 @@ function App() {
 
   function handleCardDelete(card) {
     setRenderLoading(true);
-    //const token = localStorage.getItem('token');
     api.removeCard(card._id)
       .then(() => {
         setCards((state) => state.filter((item) => item._id !== card._id));
@@ -272,7 +140,6 @@ function App() {
 
   function handleUpdateUser(newUser) {
     setRenderLoading(true);
-    //const token = localStorage.getItem('token');
     api.saveUserChanges(newUser)
       .then((data) => {
         setCurrentUser(data);
@@ -288,7 +155,6 @@ function App() {
 
   function handleUpdateAvatar(newAvatar) {
     setRenderLoading(true);
-    //const token = localStorage.getItem('token');
     api.changedAvatar(newAvatar)
       .then((data) => {
         setCurrentUser({ ...currentUser, avatar: data.avatar });
@@ -304,10 +170,8 @@ function App() {
 
   function handleAddPlaceSubmit(cardData) {
     setRenderLoading(true);
-    //const token = localStorage.getItem('token');
     api.postNewCard(cardData)
       .then((newCard) => {
-        console.log(newCard);
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
@@ -339,12 +203,9 @@ function App() {
 
   function handleLogin(password, email) {
     setRenderLoading(true);
-    //const token = localStorage.getItem('token');
-    //console.log(`token: ${token}`);
     login(password, email)
       .then(data => {
         if (data) {
-          //localStorage.setItem('token',data.token);
           setEmail(email);
           setCurrentUser(data);
           api.getUserData();
@@ -363,7 +224,6 @@ function App() {
 
   function handleSignOut() {
     localStorage.removeItem('token');
-    //getLogoutUser();
     setLoggedIn(false);
     setEmail('');
   }
