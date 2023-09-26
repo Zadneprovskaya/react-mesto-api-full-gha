@@ -18,7 +18,6 @@ function AddPlacePopup(props) {
   });
 
   function onSubmit(data) {
-    data.preventDefault();
     props.onAddPlace({
       name: data.name,
       link: data.link,

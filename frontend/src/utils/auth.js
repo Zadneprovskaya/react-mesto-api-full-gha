@@ -33,7 +33,6 @@ export const login = (password, email) => {
     })
     .then((data) => {
       if (data.token) {
-        console.log(data);
         const { token } = data;
         localStorage.setItem('token', token);
 
@@ -51,7 +50,6 @@ export const checkToken = (token) => {
   })
     .then(res => {
       if (res.ok) {
-        console.log(res);
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
