@@ -109,6 +109,7 @@ function App() {
     if (token) {
       checkToken(token)
         .then((data) => {
+          console.log(token);
           handleLoggedIn();
           setEmail(data.email);
         })
