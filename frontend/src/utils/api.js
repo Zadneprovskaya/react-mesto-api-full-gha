@@ -6,9 +6,18 @@ class Api {
     this._cardsUrl = `${this._baseUrl}/cards`;
   }
 
-  _checkResponse(res) {
+  /* _checkResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-  }
+  } */
+
+  _checkResponse(res) {
+    if (res.ok) {
+      console.log(res);
+      return res.json();
+    } else {
+      Promise.reject(`Ошибка: ${res.status}/${res.statusText}`);
+    };
+  };
 
   _request(url, options) {
     return fetch(url, options).then(this._checkResponse)

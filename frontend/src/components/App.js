@@ -69,6 +69,23 @@ function App() {
           setUserData(userData);
           handleLoggedIn();
           navigate('/', { replace: true });
+
+          if (loggedIn) {
+            setRenderLoading(true);
+      
+            Promise.all([api.getUserData(), api.getInitialCards()])
+              .then(([user, cards]) => {
+                console.log(`Promise: ${[user, cards]}`);
+                setCurrentUser(user);
+                setCards(cards);
+              })
+              .catch((err) => {
+                console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
+              })
+              .finally(() => {
+                setRenderLoading(false);
+              })
+          };
         })
         .catch((err) => {
           console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
@@ -77,13 +94,13 @@ function App() {
           setRenderLoading(false);
         })
     };
-  }, [navigate]);
+  }, [loggedIn,navigate]);
 
   React.useEffect(() => {
     getToken();
   }, [getToken]);
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     if (loggedIn) {
       setRenderLoading(true);
 
@@ -100,7 +117,7 @@ function App() {
           setRenderLoading(false);
         })
     };
-  }, [loggedIn]);
+  }, [loggedIn]); */
 
 
 
@@ -336,7 +353,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <Header email={email} onSignOut={handleSignOut} setUserData={setUserData} userData={userData} />
+        <Header email={email} onSignOut={handleSignOut} />
         <Routes>
 
           <Route path="/" element={<ProtectedRoute
@@ -348,7 +365,9 @@ function App() {
             onCardClick={handleCardClick}
             cards={cards}
             onCardDelete={handleConfirmDeletionClick}
-            onCardLike={handleCardLike} />} />
+            onCardLike={handleCardLike}
+            setUserData={setUserData} 
+            userData={userData} />} />
           <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
           <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
           <Route path="/not-found" element={<NotFound loggedIn={loggedIn} />} />
