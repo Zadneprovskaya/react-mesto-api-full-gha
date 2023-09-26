@@ -25,11 +25,11 @@ class Api {
 
   getUserData() {
     return this._request(this._userUrl, { 
-      headers: this._headers
-      /* headers: {
+      //headers: this._headers
+      headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      } */
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      }
     })
   }
 
@@ -65,11 +65,11 @@ class Api {
 
   getInitialCards() {
     return this._request(this._cardsUrl, { 
-      headers: this._headers 
-      /* headers: {
+      //headers: this._headers 
+      headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      }, */
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
     })
   }
 
