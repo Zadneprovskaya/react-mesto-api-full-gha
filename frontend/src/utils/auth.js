@@ -33,7 +33,7 @@ export const login = (password, email) => {
       email,
     })
   })
-    /* .then(res => {
+    .then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -47,8 +47,8 @@ export const login = (password, email) => {
 
         return token;
       };
-    }) */
-    .then(res => {if (res.ok) return res.json()})
+    })
+    //.then(res => {if (res.ok) return res.json()})
 }
 
 export const checkToken = (token) => {

@@ -340,17 +340,15 @@ function App() {
 
   function handleLogin(password, email) {
     setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    console.log(`token: ${token}`);
-    login(password, email, token)
+    //const token = localStorage.getItem('token');
+    //console.log(`token: ${token}`);
+    login(password, email)
       .then(data => {
         if (data) {
-          const token = localStorage.getItem('token');
-          console.log(token);
-          console.log(`login в data возвращает: ${data}`);
+          localStorage.setItem('token',data.token);
           setEmail(email);
           setCurrentUser(data);
-          api.getUserData(token);
+          api.getUserData();
           handleLoggedIn();
           navigate('/', { replace: true });
         }
