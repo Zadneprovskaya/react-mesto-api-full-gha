@@ -116,13 +116,13 @@ function App() {
           navigate("/", {replace: true});
         });
 
-      Promise.all([ api.getUserData(token), api.getInitialCards(token) ])
+      /* Promise.all([ api.getUserData(token), api.getInitialCards(token) ])
         .then(res => {
           const [ userData, cardsArray ] = res;
           setCards(cardsArray);
           setCurrentUser(userData);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err)); */
     }
   }, [navigate])
 
@@ -155,11 +155,13 @@ function App() {
         })
     }
   }, [navigate]);
+  */
 
   React.useEffect(() => {
     setRenderLoading(true);
+    const token = localStorage.getItem('token');
     if (loggedIn) {
-    api.getInitialCards()
+    api.getInitialCards(token)
       .then((data) => {
         setCards(data);
       })
@@ -174,8 +176,9 @@ function App() {
 
   React.useEffect(() => {
     setRenderLoading(true);
+    const token = localStorage.getItem('token');
     if (loggedIn) {
-    api.getUserData()
+    api.getUserData(token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -186,7 +189,7 @@ function App() {
         setRenderLoading(false);
       })
     };
-  }, [loggedIn]); */
+  }, [loggedIn]); 
 
   function handleLoggedIn() {
     setLoggedIn(true);
