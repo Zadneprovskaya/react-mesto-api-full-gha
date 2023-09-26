@@ -23,16 +23,24 @@ class Api {
     return fetch(url, options).then(this._checkResponse)
   }
 
-  getUserData() {
+  getUserData(token) {
     return this._request(this._userUrl, { 
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
   }
 
-  saveUserChanges({ name, about }) {
+  saveUserChanges({ name, about }, token) {
     return this._request(this._userUrl, {
       method: 'PATCH',
-      headers: this._headers,
+      //headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({ name, about })
       /* body: JSON.stringify({
         name: name,
@@ -41,24 +49,38 @@ class Api {
     })
   }
 
-  changedAvatar(src) {
+  changedAvatar(src, token) {
     return this._request(`${this._userUrl}/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      //headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         avatar: src,
       })
     })
   }
 
-  getInitialCards() {
-    return this._request(this._cardsUrl, { headers: this._headers })
+  getInitialCards(token) {
+    return this._request(this._cardsUrl, { 
+      //headers: this._headers 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
   }
 
-  postNewCard({ name, link }) {
+  postNewCard({ name, link }, token) {
     return this._request(this._cardsUrl, {
       method: 'POST',
-      headers: this._headers,
+      //headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({ name, link })
       /* body: JSON.stringify({
         name: name,
@@ -67,34 +89,46 @@ class Api {
     })
   }
 
-  removeCard(cardId) {
+  removeCard(cardId, token) {
     return this._request(`${this._cardsUrl}/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
   }
 
-  likedCard(cardId) {
+  likedCard(cardId, token) {
     return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'PUT',
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
   }
 
-  dislikedCard(cardId) {
+  dislikedCard(cardId, token) {
     return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'DELETE',
-      headers: this._headers
+      //headers: this._headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
   }
 }
 
 const api = new Api({
   baseUrl: 'https://api.myeducateproject.nomoredomainsrocks.ru',
-  headers: {
-    //'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  /* headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
-  }
+  } */
 });
 
 export default api;

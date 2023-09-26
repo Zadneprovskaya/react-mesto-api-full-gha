@@ -116,7 +116,7 @@ function App() {
           navigate("/", {replace: true});
         });
 
-      Promise.all([ api.getUserData(), api.getInitialCards() ])
+      Promise.all([ api.getUserData(token), api.getInitialCards(token) ])
         .then(res => {
           const [ userData, cardsArray ] = res;
           setCards(cardsArray);
@@ -227,9 +227,9 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
+    const token = localStorage.getItem('token');
     if (isLiked) {
-      api.dislikedCard(card._id)
+      api.dislikedCard(card._id, token)
         .then((newCard) => {
           const newCards = cards.map((c) => c._id === card._id ? newCard : c);
           setCards(newCards);
@@ -238,7 +238,7 @@ function App() {
           console.log(err);
         });
     } else {
-      api.likedCard(card._id)
+      api.likedCard(card._id, token)
         .then((newCard) => {
           const newCards = cards.map((c) => c._id === card._id ? newCard : c);
           setCards(newCards);
@@ -251,7 +251,8 @@ function App() {
 
   function handleCardDelete(card) {
     setRenderLoading(true);
-    api.removeCard(card._id)
+    const token = localStorage.getItem('token');
+    api.removeCard(card._id, token)
       .then(() => {
         setCards((state) => state.filter((item) => item._id !== card._id));
         closeAllPopups();
@@ -266,7 +267,8 @@ function App() {
 
   function handleUpdateUser(newUser) {
     setRenderLoading(true);
-    api.saveUserChanges(newUser)
+    const token = localStorage.getItem('token');
+    api.saveUserChanges(newUser, token)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -281,7 +283,8 @@ function App() {
 
   function handleUpdateAvatar(newAvatar) {
     setRenderLoading(true);
-    api.changedAvatar(newAvatar)
+    const token = localStorage.getItem('token');
+    api.changedAvatar(newAvatar, token)
       .then((data) => {
         setCurrentUser({ ...currentUser, avatar: data.avatar });
         closeAllPopups();
@@ -296,8 +299,8 @@ function App() {
 
   function handleAddPlaceSubmit(cardData) {
     setRenderLoading(true);
-
-    api.postNewCard(cardData)
+    const token = localStorage.getItem('token');
+    api.postNewCard(cardData, token)
       .then((newCard) => {
         console.log(newCard);
         setCards([newCard, ...cards]);
@@ -331,13 +334,14 @@ function App() {
 
   function handleLogin(password, email) {
     setRenderLoading(true);
-    login(password, email)
+    const token = localStorage.getItem('token');
+    login(password, email, token)
       .then(data => {
         if (data) {
           console.log(`login в data возвращает: ${data}`);
           setEmail(email);
           setCurrentUser(data);
-          api.getUserData();
+          api.getUserData(token);
           handleLoggedIn();
           navigate('/', { replace: true });
         }
@@ -352,7 +356,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.clear('token');
+    localStorage.removeItem('token');
     //getLogoutUser();
     setLoggedIn(false);
     setEmail('');

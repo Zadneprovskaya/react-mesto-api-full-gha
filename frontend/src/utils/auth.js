@@ -21,11 +21,12 @@ export const registration = (password, email) => {
     .then(res => {if (res.ok) return res.json()})
 };
 
-export const login = (password, email) => {
+export const login = (password, email, token) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({
       password,
@@ -53,21 +54,24 @@ export const login = (password, email) => {
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     //method: 'GET',
-    /* headers: {
+    headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`, 
-    } */
-    headers: {
+    }
+    /* headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
-    }
+    } */
   })
-    /* .then(res => {
+    .then(res => {
       if (res.ok) {
+        console.log(res);
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .then(data => data) */
-    .then(res => {if (res.ok) return res.json()})
+    .then(data => {
+      console.log(data);
+      return data})
+    //.then(res => {if (res.ok) return res.json()})
 } 
