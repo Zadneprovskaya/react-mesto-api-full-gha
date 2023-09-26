@@ -1,7 +1,7 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
+    //this._headers = headers;
     this._userUrl = `${this._baseUrl}/users/me`;
     this._cardsUrl = `${this._baseUrl}/cards`;
   }
@@ -33,13 +33,13 @@ class Api {
     })
   }
 
-  saveUserChanges({ name, about }, token) {
+  saveUserChanges({ name, about }) {
     return this._request(this._userUrl, {
       method: 'PATCH',
       //headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ name, about })
       /* body: JSON.stringify({
@@ -49,13 +49,13 @@ class Api {
     })
   }
 
-  changedAvatar(src, token) {
+  changedAvatar(src) {
     return this._request(`${this._userUrl}/avatar`, {
       method: 'PATCH',
       //headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         avatar: src,
@@ -73,13 +73,13 @@ class Api {
     })
   }
 
-  postNewCard({ name, link }, token) {
+  postNewCard({ name, link }) {
     return this._request(this._cardsUrl, {
       method: 'POST',
       //headers: this._headers,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({ name, link })
       /* body: JSON.stringify({
@@ -89,35 +89,35 @@ class Api {
     })
   }
 
-  removeCard(cardId, token) {
+  removeCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}`, {
       method: 'DELETE',
       //headers: this._headers
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     })
   }
 
-  likedCard(cardId, token) {
+  likedCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'PUT',
       //headers: this._headers
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     })
   }
 
-  dislikedCard(cardId, token) {
+  dislikedCard(cardId) {
     return this._request(`${this._cardsUrl}/${cardId}/likes`, {
       method: 'DELETE',
       //headers: this._headers
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     })
   }

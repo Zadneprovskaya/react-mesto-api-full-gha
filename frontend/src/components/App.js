@@ -105,11 +105,10 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-
+    console.log(token);
     if (token) {
       checkToken(token)
         .then((data) => {
-          console.log(token);
           handleLoggedIn();
           setEmail(data.email);
         })
@@ -117,13 +116,13 @@ function App() {
           navigate("/", {replace: true});
         });
 
-      /* Promise.all([ api.getUserData(token), api.getInitialCards(token) ])
+      Promise.all([ api.getUserData(), api.getInitialCards() ])
         .then(res => {
           const [ userData, cardsArray ] = res;
           setCards(cardsArray);
           setCurrentUser(userData);
         })
-        .catch(err => console.log(err)); */
+        .catch(err => console.log(err));
     }
   }, [navigate])
 
@@ -158,7 +157,7 @@ function App() {
   }, [navigate]);
   */
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     setRenderLoading(true);
     const token = localStorage.getItem('token');
     console.log(token);
@@ -192,7 +191,7 @@ function App() {
         setRenderLoading(false);
       })
     };
-  }, [loggedIn]); 
+  }, [loggedIn]);  */
 
   function handleLoggedIn() {
     setLoggedIn(true);
@@ -233,9 +232,9 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
     if (isLiked) {
-      api.dislikedCard(card._id, token)
+      api.dislikedCard(card._id)
         .then((newCard) => {
           const newCards = cards.map((c) => c._id === card._id ? newCard : c);
           setCards(newCards);
@@ -244,7 +243,7 @@ function App() {
           console.log(err);
         });
     } else {
-      api.likedCard(card._id, token)
+      api.likedCard(card._id)
         .then((newCard) => {
           const newCards = cards.map((c) => c._id === card._id ? newCard : c);
           setCards(newCards);
@@ -257,8 +256,8 @@ function App() {
 
   function handleCardDelete(card) {
     setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    api.removeCard(card._id, token)
+    //const token = localStorage.getItem('token');
+    api.removeCard(card._id)
       .then(() => {
         setCards((state) => state.filter((item) => item._id !== card._id));
         closeAllPopups();
@@ -273,8 +272,8 @@ function App() {
 
   function handleUpdateUser(newUser) {
     setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    api.saveUserChanges(newUser, token)
+    //const token = localStorage.getItem('token');
+    api.saveUserChanges(newUser)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -289,8 +288,8 @@ function App() {
 
   function handleUpdateAvatar(newAvatar) {
     setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    api.changedAvatar(newAvatar, token)
+    //const token = localStorage.getItem('token');
+    api.changedAvatar(newAvatar)
       .then((data) => {
         setCurrentUser({ ...currentUser, avatar: data.avatar });
         closeAllPopups();
@@ -305,8 +304,8 @@ function App() {
 
   function handleAddPlaceSubmit(cardData) {
     setRenderLoading(true);
-    const token = localStorage.getItem('token');
-    api.postNewCard(cardData, token)
+    //const token = localStorage.getItem('token');
+    api.postNewCard(cardData)
       .then((newCard) => {
         console.log(newCard);
         setCards([newCard, ...cards]);
