@@ -12,12 +12,13 @@ export const registration = (password, email) => {
       email,
     })
   })
-    .then(res => {
+    /* .then(res => {
       if (res.ok) {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    }) */
+    .then(res => {if (res.ok) return res.json()})
 };
 
 export const login = (password, email) => {
@@ -31,7 +32,7 @@ export const login = (password, email) => {
       email,
     })
   })
-    .then(res => {
+    /* .then(res => {
       if (res.ok) {
         return res.json();
       }
@@ -45,22 +46,28 @@ export const login = (password, email) => {
 
         return token;
       };
-    })
+    }) */
+    .then(res => {if (res.ok) return res.json()})
 }
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     //method: 'GET',
-    headers: {
+    /* headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`, 
+    } */
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
     }
   })
-    .then(res => {
+    /* .then(res => {
       if (res.ok) {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     })
-    .then(data => data)
+    .then(data => data) */
+    .then(res => {if (res.ok) return res.json()})
 } 

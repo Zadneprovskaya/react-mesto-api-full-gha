@@ -32,26 +32,26 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [renderLoading, setRenderLoading] = React.useState(false);
 
-  //const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
 
-  const [currentUser, setCurrentUser] = React.useState({
+  /* const [currentUser, setCurrentUser] = React.useState({
     _id: '',
     email: '',
     name: '',
     about: '',
     avatar: ''
-  });
+  }); */
 
-  const [userData, setUserData] = React.useState({
+  /* const [userData, setUserData] = React.useState({
     _id: '',
     email: ''
-  });
+  }); */
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
-  const getToken = React.useCallback(() => {
+  /* const getToken = React.useCallback(() => {
     const token = localStorage.getItem('token');
 
     if (token) {
@@ -66,27 +66,9 @@ function App() {
           };
           console.log(`useCallback -> checkToken -> userData: ${_id}`);
           setEmail(userData.email);
-          setUserData(userData);
           setCurrentUser(userData);
           handleLoggedIn();
           navigate('/', { replace: true });
-
-          if (loggedIn) {
-            setRenderLoading(true);
-      
-            Promise.all([api.getUserData(), api.getInitialCards()])
-              .then(([user, cards]) => {
-                console.log(`Promise: ${[user, cards]}`);
-                setCurrentUser(user);
-                setCards(cards);
-              })
-              .catch((err) => {
-                console.log(`Ошибка в процессе загрузки данных пользователя и галереи карточек: ${err}`);
-              })
-              .finally(() => {
-                setRenderLoading(false);
-              })
-          };
         })
         .catch((err) => {
           console.log(`Ошибка в процессе проверки токена пользователя и получения личных данных: ${err}`);
@@ -95,13 +77,13 @@ function App() {
           setRenderLoading(false);
         })
     };
-  }, [loggedIn,navigate]);
+  }, [navigate]);
 
   React.useEffect(() => {
     getToken();
   }, [getToken]);
 
-  /* React.useEffect(() => {
+  React.useEffect(() => {
     if (loggedIn) {
       setRenderLoading(true);
 
@@ -119,6 +101,30 @@ function App() {
         })
     };
   }, [loggedIn]); */
+
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      checkToken(token)
+        .then((data) => {
+          handleLoggedIn();
+          setEmail(data.email);
+        })
+        .then(() => {
+          navigate("/", {replace: true});
+        });
+
+      Promise.all([ api.getUserData(), api.getInitialCards() ])
+        .then(res => {
+          const [ userData, cardsArray ] = res;
+          setCards(cardsArray);
+          setCurrentUser(userData);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [navigate])
 
 
 
@@ -347,6 +353,7 @@ function App() {
 
   function handleSignOut() {
     localStorage.clear('token');
+    //getLogoutUser();
     setLoggedIn(false);
     setEmail('');
   }
@@ -367,8 +374,7 @@ function App() {
             cards={cards}
             onCardDelete={handleConfirmDeletionClick}
             onCardLike={handleCardLike}
-            setUserData={setUserData} 
-            userData={userData} />} />
+           />} />
           <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
           <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
           <Route path="/not-found" element={<NotFound loggedIn={loggedIn} />} />
